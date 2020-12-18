@@ -2,8 +2,8 @@ const Users = require('../auth/auth-model');
 const jwt = require('jsonwebtoken');
 
 const checkPayload = (req, res, next) => {
-   if ( !req.body.username && !req.body.password ) {
-            res.status(401).json({ message: 'Must have username and password!'}); 
+   if ( !req.body.username || !req.body.password ) {
+            res.status(401).json('username and password required'); 
    } else {
             next();
    }
@@ -15,10 +15,10 @@ const checkUsernameUnique = async (req, res, next) => {
             if (!rows.length) {
                      next();
             } else {
-                     res.status(401).json('username taken!');
+                     res.status(401).json("username taken");
             }
    } catch (error) {
-            res.status(500).json({ message: 'something terrible happened!!'})
+            res.status(500).json("username taken")
    }
 };
 
@@ -29,10 +29,10 @@ const checkUsernameExists = async (req, res, next) => {
                      req.userData = rows[0];
                      next();         
             } else {
-                     res.status(404).json('No such username!');
+                     res.status(404).json("invalid credentials");
             }
    } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json("invalid credentials");
    }
 }
 

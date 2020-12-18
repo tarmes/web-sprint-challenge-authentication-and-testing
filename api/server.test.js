@@ -1,4 +1,7 @@
 // Write your tests here
-test('sanity', () => {
-  expect(true).toBe(false)
+
+describe('Endpoints', () => {
+  it('sanity', () => {
+    expect(true).toBe(true)
+  })
 })
